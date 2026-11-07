@@ -1,0 +1,100 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>@ViewData["Title"] - TDev Administration</title>
+    
+    <link rel="icon" type="image/svg+xml" href="~/assets/favicon.svg" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/mobile.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="admin-body">
+    <!-- SVG Icon Definitions dùng chung từ Layout chính -->
+    <partial name="_Header" />
+
+    <div class="admin-wrapper" style="display: flex; min-height: 100vh;">
+        <!-- Sidebar từ 20-sidebar.html -->
+        <aside class="sb">
+            <a class="lg" asp-area="" asp-controller="Home" asp-action="Index">
+                <b>T</b>TDev
+            </a>
+            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                <svg class="i"><use href="#i-grid" /></svg>Dashboard
+            </a>
+            <a asp-area="Admin" asp-controller="Products" asp-action="Index">
+                <svg class="i"><use href="#i-box" /></svg>Products
+            </a>
+            <a asp-area="Admin" asp-controller="Categories" asp-action="Index">
+                <svg class="i"><use href="#i-layers" /></svg>Categories
+            </a>
+            <a asp-area="Admin" asp-controller="Orders" asp-action="Index">
+                <svg class="i"><use href="#i-bag" /></svg>Orders
+            </a>
+            <a asp-area="Admin" asp-controller="Quotes" asp-action="Index">
+                <svg class="i"><use href="#i-file" /></svg>Quote Requests
+            </a>
+            <a asp-area="Admin" asp-controller="Users" asp-action="Index">
+                <svg class="i"><use href="#i-users" /></svg>Users
+            </a>
+            <p class="ws">
+                <small>WORKSPACE</small>
+                <b>TDev Administration</b>
+                <small>Manage your business catalog.</small>
+            </p>
+        </aside>
+
+        <!-- Khung nội dung chính & Topbar -->
+        <div class="admin-main-wrap" style="flex: 1; display: flex; flex-direction: column;">
+            <!-- Topbar quản trị (.atop) -->
+            <header class="atop" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; border-bottom: 1px solid var(--bd);">
+                <div class="atop-left">
+                    <span class="pill">ADMIN PANEL</span>
+                </div>
+                <div class="atop-right" style="display: flex; align-items: center; gap: 16px;">
+                    <!-- Nút đổi tiền tệ & ngôn ngữ -->
+                    <button type="button" class="bo sm" id="btn-curr-toggle">VNĐ / USD</button>
+                    <button type="button" class="bo sm" id="btn-lang-toggle">VI / EN</button>
+
+                    <!-- Chuông thông báo -->
+                    <button type="button" class="ic-btn" aria-label="Notifications" style="background: none; border: none; cursor: pointer; color: var(--tx);">
+                        <svg class="i"><use href="#i-bell" /></svg>
+                    </button>
+
+                    <!-- Profile & Logout -->
+                    <div class="admin-user-info" style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-weight: 600; font-size: 14px;">@User.Identity?.Name</span>
+                        <form asp-area="Admin" asp-controller="Auth" asp-action="Logout" method="post" style="display: inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="bo sm danger">Đăng xuất</button>
+                        </form>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Render nội dung từng trang Dashboard/Users/Products -->
+            <main style="flex: 1; padding: 24px;">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <!-- Script dữ liệu đồng bộ người dùng -->
+    <script>
+        window.TDEV_ME = {
+            authenticated: @(User.Identity?.IsAuthenticated == true ? "true" : "false"),
+            name: "@User.Identity?.Name",
+            role: "@User.FindFirst(ClaimTypes.Role)?.Value",
+            avatar: null
+        };
+    </script>
+
+    <script src="~/js/app.js" asp-append-version="true"></script>
+    <script src="~/js/admin-core.js" asp-append-version="true"></script>
+    <script src="~/js/mobile.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

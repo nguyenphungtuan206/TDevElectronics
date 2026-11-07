@@ -1,0 +1,160 @@
+﻿@{
+    ViewData["Title"] = "Support";
+}
+
+<section class="pg spp" id="support">
+    <p class="cr m"><a asp-controller="Home" asp-action="Index">Home</a> &nbsp;/&nbsp; Support</p>
+
+    <div class="b-hero s-hero">
+        <div class="s-top">
+            <div>
+                <!-- Huy hiệu hiển thị trạng thái Open/Closed do info-pages.js tự động cập nhật -->
+                <span class="sp-badge" id="sp-open"><i></i><b></b></span>
+                <h1>How can we help?</h1>
+                <p class="b-lead">Support is available Monday to Friday, 9am to 6pm.</p>
+            </div>
+        </div>
+
+        <div class="s-contact">
+            <a class="s-c" href="mailto:support@tdev.com">
+                <span class="ib"><svg class="i"><use href="#i-mail" /></svg></span>
+                <div>
+                    <small class="m">Email us</small>
+                    <b>support@tdev.com</b>
+                    <small class="m">We reply within one business day.</small>
+                </div>
+            </a>
+            <a class="s-c" href="tel:+14155550100">
+                <span class="ib t2c"><svg class="i"><use href="#i-phone2" /></svg></span>
+                <div>
+                    <small class="m">Call us</small>
+                    <b>+1 (415) 555-0100</b>
+                    <small class="m">Monday to Friday, 9am to 6pm</small>
+                </div>
+            </a>
+            <a class="s-c" href="#map">
+                <span class="ib t3c"><svg class="i"><use href="#i-pin" /></svg></span>
+                <div>
+                    <small class="m">Visit us</small>
+                    <b>Vinh City, Nghe An, Vietnam</b>
+                    <small class="m">See the map</small>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Bản đồ và giờ làm việc -->
+    <div class="b-sec" id="map">
+        <div class="b-h">
+            <h2>Visit our office</h2>
+        </div>
+        <div class="sp-map">
+            <aside class="sp-info">
+                <p class="m">Come and meet the team, see devices in person or talk through a larger order.</p>
+                <div class="sp-addr">
+                    <span class="ib"><svg class="i"><use href="#i-pin" /></svg></span>
+                    <div>
+                        <b>TDev Electronics</b><br>
+                        <span class="m">Vinh City, Nghe An, Vietnam</span>
+                    </div>
+                </div>
+
+                <h4><svg class="i"><use href="#i-clock" /></svg>Opening hours</h4>
+                <!-- Giữ nguyên data-d để info-pages.js nhận diện thứ trong tuần -->
+                <ul class="sp-hours">
+                    <li data-d="1"><span>Monday</span><span>9:00 – 18:00</span></li>
+                    <li data-d="2"><span>Tuesday</span><span>9:00 – 18:00</span></li>
+                    <li data-d="3"><span>Wednesday</span><span>9:00 – 18:00</span></li>
+                    <li data-d="4"><span>Thursday</span><span>9:00 – 18:00</span></li>
+                    <li data-d="5"><span>Friday</span><span>9:00 – 18:00</span></li>
+                    <li data-d="6" class="off"><span>Saturday</span><span>Closed</span></li>
+                    <li data-d="0" class="off"><span>Sunday</span><span>Closed</span></li>
+                </ul>
+
+                <div class="sp-acts">
+                    <a class="bt" href="https://www.google.com/maps/dir/?api=1&amp;destination=18.6733,105.6923" target="_blank" rel="noopener noreferrer">
+                        <svg class="i"><use href="#i-nav" /></svg>Get directions
+                    </a>
+                    <a class="bo" href="https://www.google.com/maps/search/?api=1&amp;query=18.6733,105.6923" target="_blank" rel="noopener noreferrer">
+                        Open in Google Maps
+                    </a>
+                </div>
+            </aside>
+            <div class="sp-frame">
+                <iframe title="Map showing the TDev office location" src="https://www.google.com/maps?q=18.6733,105.6923&amp;z=15&amp;hl=vi&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Khối chủ đề trợ giúp -->
+    <div class="b-sec">
+        <div class="b-h">
+            <h2>Help topics</h2>
+        </div>
+        <div class="b-cards">
+            <div class="b-card">
+                <span class="ib"><svg class="i"><use href="#i-truck" /></svg></span>
+                <h3>Delivery &amp; returns</h3>
+                <p class="m">Free delivery on business orders. 30-day return policy on unused items.</p>
+            </div>
+            <div class="b-card">
+                <span class="ib t2c"><svg class="i"><use href="#i-shield" /></svg></span>
+                <h3>Warranty</h3>
+                <p class="m">All devices include the manufacturer warranty. Extended cover is available on request.</p>
+            </div>
+            <div class="b-card">
+                <span class="ib t3c"><svg class="i"><use href="#i-file" /></svg></span>
+                <h3>Orders &amp; invoices</h3>
+                <p class="m">Your account specialist can help with orders, invoices and quotes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Khối câu hỏi thường gặp FAQ -->
+    <div class="b-sec">
+        <div class="b-h">
+            <h2>Frequently asked questions</h2>
+        </div>
+        <div class="sp-faq">
+            <details>
+                <summary><span>How do I get a quote for my team?</span><svg class="i"><use href="#i-down" /></svg></summary>
+                <p class="m">Use the Request a quote form and tell us what you need. We will send a tailored quote within one business day.</p>
+            </details>
+            <details>
+                <summary><span>Is delivery free?</span><svg class="i"><use href="#i-down" /></svg></summary>
+                <p class="m">Delivery is free on business orders, and everything arrives in one coordinated delivery.</p>
+            </details>
+            <details>
+                <summary><span>What is your return policy?</span><svg class="i"><use href="#i-down" /></svg></summary>
+                <p class="m">Unused items can be returned within 30 days. Contact support with your order number and we will guide you.</p>
+            </details>
+            <details>
+                <summary><span>Are the devices genuine and under warranty?</span><svg class="i"><use href="#i-down" /></svg></summary>
+                <p class="m">Yes. Every device comes from an authorised supplier and includes the manufacturer warranty. Extended cover is available on request.</p>
+            </details>
+            <details>
+                <summary><span>Can I get a tax invoice?</span><svg class="i"><use href="#i-down" /></svg></summary>
+                <p class="m">Yes. Business orders include tax invoices, and your account specialist can also help with purchase orders.</p>
+            </details>
+            <details>
+                <summary><span>How do I cancel an order?</span><svg class="i"><use href="#i-down" /></svg></summary>
+                <p class="m">Open My account, choose the order and send a cancel request. The order is cancelled once TDev approves it.</p>
+            </details>
+        </div>
+    </div>
+
+    <div class="b-band">
+        <div>
+            <h3>Need an invoice or a hand?</h3>
+            <p>Your account specialist can help with orders, invoices and quotes.</p>
+        </div>
+        <div class="b-btns">
+            <a class="bw" asp-controller="Account" asp-action="Index" data-view="quotes">View my quotes</a>
+            <a class="b-ghost" asp-controller="Account" asp-action="Index">My account</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/info-pages.js" asp-append-version="true"></script>
+}

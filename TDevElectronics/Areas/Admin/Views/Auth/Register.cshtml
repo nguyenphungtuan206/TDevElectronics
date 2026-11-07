@@ -1,0 +1,88 @@
+﻿@model TDevElectronics.Models.ViewModels.AdminRegisterViewModel
+@{
+    ViewData["Title"] = "Kích hoạt tài khoản Quản trị";
+    Layout = "_Layout";
+}
+
+<section class="pg " id="admin-register">
+    <div class="wrap au">
+        <div class="dkp">
+            <span class="pill w">ADMIN ONBOARDING</span>
+            <h1>Join the Management Team.</h1>
+            <p>Activate your workspace account with your unique invitation code.</p>
+            <div class="ph hero hh"></div>
+            <ul class="cl w">
+                <li><svg class="i "><use href="#i-check" /></svg>One-time use invite code</li>
+                <li><svg class="i "><use href="#i-check" /></svg>12+ characters password requirement</li>
+                <li><svg class="i "><use href="#i-check" /></svg>Secure hash verification (SHA-256)</li>
+            </ul>
+        </div>
+
+        <div class="af auth-form" data-portal="admin">
+            <nav class="rs" aria-label="Choose account type">
+                <a href="/Account/Login">
+                    <svg class="i"><use href="#i-user" /></svg>
+                    <span><b>Customer</b><small>Shop &amp; request quotes</small></span>
+                </a>
+                <a href="/Admin/Auth/Login" class="adm on">
+                    <svg class="i"><use href="#i-shield" /></svg>
+                    <span><b>Admin</b><small>Manage the store</small></span>
+                </a>
+            </nav>
+
+            <h1>Activate invite</h1>
+            <p class="m">Enter your invite code and set up your administrator account.</p>
+
+            <form asp-area="Admin" asp-controller="Auth" asp-action="Register" method="post">
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly" class="er fm" role="alert" style="margin-bottom: 12px;"></div>
+
+                <label class="fld">
+                    <small>Invite Code *</small>
+                    <input asp-for="InviteCode" type="text" placeholder="e.g. TDEV-ADM-XXXX-XXXX" style="letter-spacing: 1px; font-family: monospace;" />
+                    <span asp-validation-for="InviteCode" class="fe"></span>
+                </label>
+
+                <label class="fld">
+                    <small>Full Name *</small>
+                    <input asp-for="FullName" type="text" placeholder="Nguyễn Văn A" />
+                    <span asp-validation-for="FullName" class="fe"></span>
+                </label>
+
+                <label class="fld">
+                    <small>Email address *</small>
+                    <input asp-for="Email" type="email" placeholder="admin@example.com" />
+                    <span asp-validation-for="Email" class="fe"></span>
+                </label>
+
+                <label class="fld">
+                    <small>Password (Min 12 characters) *</small>
+                    <span class="pwr">
+                        <input asp-for="Password" type="password" autocomplete="new-password" />
+                        <button type="button" class="eye" data-eye aria-label="Show password">Show</button>
+                    </span>
+                    <span asp-validation-for="Password" class="fe"></span>
+                </label>
+
+                <label class="fld">
+                    <small>Confirm Password *</small>
+                    <span class="pwr">
+                        <input asp-for="ConfirmPassword" type="password" autocomplete="new-password" />
+                        <button type="button" class="eye" data-eye aria-label="Show password">Show</button>
+                    </span>
+                    <span asp-validation-for="ConfirmPassword" class="fe"></span>
+                </label>
+
+                <button class="bt wd" type="submit" style="margin-top: 14px;">
+                    Activate Admin Account <svg class="i"><use href="#i-arrow" /></svg>
+                </button>
+            </form>
+
+            <p class="m sw4">
+                Already activated?
+                <a class="pc2" href="/Admin/Auth/Login" onclick="window.location.href=this.href;">Sign in here</a>
+            </p>
+        </div>
+    </div>
+</section>

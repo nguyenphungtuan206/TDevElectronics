@@ -1,0 +1,177 @@
+﻿@model IEnumerable<TDevElectronics.Models.Entities.User>
+@{
+    ViewData["Title"] = "Quản lý Người dùng & Quyền";
+    var activeInvites = ViewBag.ActiveInvites as List<TDevElectronics.Models.Entities.AdminInvite>;
+}
+
+<div class="dash-head" style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-start;">
+    <div>
+        <h1>Quản lý Người dùng & Quản trị viên</h1>
+        <p class="m">Quản lý trạng thái kích hoạt, phân quyền và cấp mã mời tham gia ban quản trị.</p>
+    </div>
+</div>
+
+@if (TempData["GeneratedInviteCode"] != null)
+{
+    <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+        <h4 style="margin: 0 0 8px 0; color: #10b981;">Mã mời Admin mới đã được tạo thành công!</h4>
+        <p style="margin: 0 0 8px 0;">Hãy sao chép mã dưới đây và gửi cho quản trị viên mới. <b>Mã này chỉ hiển thị một lần duy nhất:</b></p>
+        <code style="font-size: 18px; padding: 6px 12px; background: var(--bg); border: 1px dashed #10b981; border-radius: 4px; display: inline-block; font-weight: bold;">
+            @TempData["GeneratedInviteCode"]
+        </code>
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div style="background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 12px; margin-bottom: 20px;">
+        @TempData["Success"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 12px; margin-bottom: 20px; color: #ef4444;">
+        @TempData["Error"]
+    </div>
+}
+
+<!-- Khu vực 1: Tạo mã mời Admin -->
+<div class="box" style="padding: 20px; border: 1px solid var(--bd); border-radius: 8px; margin-bottom: 28px;">
+    <h3>Tạo mã mời Admin mới</h3>
+    <p class="m">Mã mời sẽ tự động hết hạn sau thời gian mặc định trong cấu hình và chỉ sử dụng được 1 lần.</p>
+    
+    <form asp-area="Admin" asp-controller="Users" asp-action="GenerateInvite" method="post" style="display: flex; gap: 12px; margin-top: 14px; max-width: 600px;">
+        @Html.AntiForgeryToken()
+        <input type="email" name="targetEmail" placeholder="Email chỉ định (để trống nếu cho phép email bất kỳ)" style="flex: 1; padding: 8px 12px; border: 1px solid var(--bd); border-radius: 4px; background: transparent; color: inherit;" />
+        <button type="submit" class="bt" style="white-space: nowrap;">Tạo mã mời</button>
+    </form>
+
+    @if (activeInvites != null && activeInvites.Any())
+    {
+        <h4 style="margin-top: 20px; margin-bottom: 10px;">Lịch sử mã mời gần đây:</h4>
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <thead>
+                <tr style="border-bottom: 1px solid var(--bd); text-align: left;">
+                    <th style="padding: 8px;">Đuôi mã</th>
+                    <th style="padding: 8px;">Chỉ định email</th>
+                    <th style="padding: 8px;">Hết hạn lúc</th>
+                    <th style="padding: 8px;">Trạng thái</th>
+                    <th style="padding: 8px; text-align: right;">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var inv in activeInvites)
+                {
+                    <tr style="border-bottom: 1px solid var(--bd);">
+                        <td style="padding: 8px;"><code>...-@inv.LastFourChars</code></td>
+                        <td style="padding: 8px;">@(inv.TargetEmail ?? "Bất kỳ ai có mã")</td>
+                        <td style="padding: 8px;">@inv.ExpiresAt.ToString("dd/MM/yyyy HH:mm") UTC</td>
+                        <td style="padding: 8px;">
+                            @if (inv.UsedAt != null)
+                            {
+                                <span style="color: #10b981;">Đã sử dụng</span>
+                            }
+                            else if (inv.IsRevoked)
+                            {
+                                <span style="color: #ef4444;">Đã thu hồi</span>
+                            }
+                            else if (inv.ExpiresAt < DateTime.UtcNow)
+                            {
+                                <span style="color: #f59e0b;">Đã hết hạn</span>
+                            }
+                            else
+                            {
+                                <span style="color: #3b82f6;">Đang khả dụng</span>
+                            }
+                        </td>
+                        <td style="padding: 8px; text-align: right;">
+                            @if (inv.UsedAt == null && !inv.IsRevoked && inv.ExpiresAt >= DateTime.UtcNow)
+                            {
+                                <form asp-area="Admin" asp-controller="Users" asp-action="RevokeInvite" asp-route-id="@inv.Id" method="post" style="display: inline;">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="bo sm danger" onclick="return confirm('Bạn có chắc chắn muốn thu hồi mã mời này?')">Thu hồi</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+<!-- Khu vực 2: Danh sách người dùng -->
+<div class="box" style="padding: 20px; border: 1px solid var(--bd); border-radius: 8px;">
+    <h3>Danh sách tài khoản hệ thống</h3>
+    
+    <!-- Bộ lọc tìm kiếm -->
+    <form method="get" style="display: flex; gap: 12px; margin: 16px 0;">
+        <input type="text" name="keyword" value="@ViewBag.Keyword" placeholder="Tìm theo tên hoặc email..." style="flex: 1; padding: 8px 12px; border: 1px solid var(--bd); border-radius: 4px; background: transparent; color: inherit;" />
+        <select name="role" style="padding: 8px 12px; border: 1px solid var(--bd); border-radius: 4px; background: var(--bg); color: inherit;">
+            <option value="">-- Tất cả vai trò --</option>
+            <option value="Customer" selected="@(ViewBag.Role == "Customer")">Customer</option>
+            <option value="Admin" selected="@(ViewBag.Role == "Admin")">Admin</option>
+        </select>
+        <button type="submit" class="bo">Lọc</button>
+        @if (!string.IsNullOrEmpty(ViewBag.Keyword) || !string.IsNullOrEmpty(ViewBag.Role))
+        {
+            <a asp-action="Index" class="bo" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">Xóa lọc</a>
+        }
+    </form>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px;">
+        <thead>
+            <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
+                <th style="padding: 10px;">Họ tên</th>
+                <th style="padding: 10px;">Email</th>
+                <th style="padding: 10px;">Vai trò</th>
+                <th style="padding: 10px;">Trạng thái</th>
+                <th style="padding: 10px;">Ngày tạo</th>
+                <th style="padding: 10px; text-align: right;">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var user in Model)
+                {
+                    <tr style="border-bottom: 1px solid var(--bd);">
+                        <td style="padding: 10px; font-weight: 600;">@user.FullName</td>
+                        <td style="padding: 10px;">@user.Email</td>
+                        <td style="padding: 10px;">
+                            <span class="pill" style="font-size: 11px; padding: 2px 8px; @(user.Role == "Admin" ? "background: rgba(239, 68, 68, 0.2); color: #ef4444;" : "")">
+                                @user.Role
+                            </span>
+                        </td>
+                        <td style="padding: 10px;">
+                            @if (user.IsActive)
+                            {
+                                <span style="color: #10b981;">● Hoạt động</span>
+                            }
+                            else
+                            {
+                                <span style="color: #ef4444;">● Đã khóa</span>
+                            }
+                        </td>
+                        <td style="padding: 10px;">@user.CreatedAt.ToString("dd/MM/yyyy")</td>
+                        <td style="padding: 10px; text-align: right;">
+                            <form asp-area="Admin" asp-controller="Users" asp-action="ToggleActive" asp-route-id="@user.Id" method="post" style="display: inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="bo sm @(user.IsActive ? "danger" : "")" onclick="return confirm('Bạn có chắc chắn muốn thay đổi trạng thái tài khoản này?')">
+                                    @(user.IsActive ? "Khóa" : "Kích hoạt")
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" style="padding: 24px; text-align: center; color: var(--tx-m);">Không tìm thấy người dùng phù hợp.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

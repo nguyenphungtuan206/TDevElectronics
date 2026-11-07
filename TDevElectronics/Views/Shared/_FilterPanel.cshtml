@@ -1,0 +1,110 @@
+﻿@model TDevElectronics.Models.ViewModels.ShopViewModel
+
+@using System.Globalization
+
+@{
+    var actionUrl = Model.Category == null
+        ? Url.Action("Index", "Shop")
+        : Url.Action("Category", "Shop", new { slug = Model.Category.Slug });
+
+    var isVietnamese =
+        CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "vi";
+}
+
+<aside class="cd fs shop-filter-panel">
+
+    <h3>@(isVietnamese ? "Bộ lọc" : "Filters")</h3>
+
+    <form method="get" action="@actionUrl">
+
+        <h4>@(isVietnamese ? "Tìm kiếm" : "Search")</h4>
+
+        <input type="search"
+               name="q"
+               value="@Model.Query"
+               placeholder="@(isVietnamese ? "Tìm kiếm sản phẩm..." : "Search products...")"
+               class="shop-input" />
+
+        <h4>@(isVietnamese ? "Thương hiệu" : "Brand")</h4>
+
+        <select name="brands"
+                multiple
+                class="shop-select">
+            @foreach (var brand in Model.Brands)
+            {
+                <option value="@brand"
+                        selected="@(Model.SelectedBrands.Contains(brand))">
+                    @brand
+                </option>
+            }
+        </select>
+
+        <p class="m">
+            @(isVietnamese
+                ? "Bạn có thể chọn nhiều thương hiệu."
+                : "You can select multiple brands.")
+        </p>
+
+        <h4>@(isVietnamese ? "Khoảng giá" : "Price range")</h4>
+
+        <label>
+            @(isVietnamese ? "Giá thấp nhất" : "Min price")
+        </label>
+
+        <input type="number"
+               name="minPrice"
+               min="0"
+               step="1"
+               value="@Model.MinPrice"
+               placeholder="0"
+               class="shop-input" />
+
+        <label>
+            @(isVietnamese ? "Giá cao nhất" : "Max price")
+        </label>
+
+        <input type="number"
+               name="maxPrice"
+               min="0"
+               step="1"
+               value="@Model.MaxPrice"
+               placeholder="1500"
+               class="shop-input" />
+
+        <h4>@(isVietnamese ? "Sắp xếp theo" : "Sort by")</h4>
+
+        <select name="sort" class="shop-select">
+
+            <option value="recommended"
+                    selected="@(Model.Sort == "recommended")">
+                @(isVietnamese ? "Đề xuất" : "Recommended")
+            </option>
+
+            <option value="price-asc"
+                    selected="@(Model.Sort == "price-asc")">
+                @(isVietnamese ? "Giá thấp đến cao" : "Price low to high")
+            </option>
+
+            <option value="price-desc"
+                    selected="@(Model.Sort == "price-desc")">
+                @(isVietnamese ? "Giá cao đến thấp" : "Price high to low")
+            </option>
+
+            <option value="rating"
+                    selected="@(Model.Sort == "rating")">
+                @(isVietnamese ? "Đánh giá cao nhất" : "Top rated")
+            </option>
+
+        </select>
+
+        <button type="submit" class="bt shop-filter-submit">
+            @(isVietnamese ? "Áp dụng bộ lọc" : "Apply filters")
+        </button>
+
+        <a href="@actionUrl" class="bo wd">
+            @(isVietnamese ? "Xóa bộ lọc" : "Reset filters")
+        </a>
+
+    </form>
+
+</aside>

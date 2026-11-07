@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+
+<section class="pg abp" id="about">
+    <p class="cr m"><a asp-controller="Home" asp-action="Index">Home</a> &nbsp;/&nbsp; About us</p>
+
+    <div class="b-hero">
+        <div class="b-txt">
+            <span class="b-k">About TDev</span>
+            <h1>Great tech. Helpful humans.</h1>
+            <p class="b-lead">TDev helps people and teams find genuine devices, with honest pricing and real support.</p>
+            <div class="b-btns">
+                <a class="bt" asp-controller="Shop" asp-action="Index">Browse products <svg class="i"><use href="#i-arrow" /></svg></a>
+                <a class="b-ghost" asp-controller="Home" asp-action="BusinessBuying">Request a quote</a>
+            </div>
+        </div>
+
+        <div class="b-vis" aria-hidden="true">
+            <div class="ph laptop b1"></div>
+            <div class="ph phone b2"></div>
+            <div class="ph headphones b3"></div>
+            <div class="b-float">
+                <span class="ib"><svg class="i"><use href="#i-shield" /></svg></span>
+                <div><b>Genuine products</b></div>
+            </div>
+        </div>
+
+        <div class="b-stats">
+            <div class="b-stat">
+                <span class="ib"><svg class="i"><use href="#i-users" /></svg></span>
+                <div>
+                    <div class="b-num">12,000+</div>
+                    <small class="m">Happy shoppers</small>
+                </div>
+            </div>
+            <div class="b-stat">
+                <span class="ib t2c"><svg class="i"><use href="#i-bag" /></svg></span>
+                <div>
+                    <div class="b-num">186</div>
+                    <small class="m">Business teams</small>
+                </div>
+            </div>
+            <div class="b-stat">
+                <span class="ib t3c"><svg class="i"><use href="#i-box" /></svg></span>
+                <div>
+                    <div class="b-num">148</div>
+                    <small class="m">Devices in catalog</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="b-sec">
+        <div class="b-h">
+            <h2>Why teams choose TDev</h2>
+        </div>
+        <div class="b-cards">
+            <div class="b-card">
+                <span class="ib"><svg class="i"><use href="#i-shield" /></svg></span>
+                <h3>Genuine products</h3>
+                <p class="m">Every device comes from authorised suppliers with full manufacturer warranty.</p>
+            </div>
+            <div class="b-card">
+                <span class="ib t2c"><svg class="i"><use href="#i-layers" /></svg></span>
+                <h3>Business-ready</h3>
+                <p class="m">Volume pricing, tax invoices, purchase orders and one coordinated delivery.</p>
+            </div>
+            <div class="b-card">
+                <span class="ib t3c"><svg class="i"><use href="#i-chat" /></svg></span>
+                <h3>Expert support</h3>
+                <p class="m">A real person who knows your order and your team.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="b-sec">
+        <div class="b-h">
+            <h2>What we offer</h2>
+        </div>
+        <div class="b-tiles">
+            <a class="b-tile" asp-controller="Shop" asp-action="Index" asp-route-category="Phones">
+                <div class="ph phone"></div>
+                <span>Phones<svg class="i"><use href="#i-arrow" /></svg></span>
+            </a>
+            <a class="b-tile" asp-controller="Shop" asp-action="Index" asp-route-category="Laptops">
+                <div class="ph laptop"></div>
+                <span>Laptops<svg class="i"><use href="#i-arrow" /></svg></span>
+            </a>
+            <a class="b-tile" asp-controller="Shop" asp-action="Index" asp-route-category="Audio">
+                <div class="ph headphones"></div>
+                <span>Audio<svg class="i"><use href="#i-arrow" /></svg></span>
+            </a>
+            <a class="b-tile" asp-controller="Shop" asp-action="Index" asp-route-category="Accessories">
+                <div class="ph hub"></div>
+                <span>Accessories<svg class="i"><use href="#i-arrow" /></svg></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="b-sec">
+        <div class="b-h">
+            <h2>How it works</h2>
+        </div>
+        <ol class="b-steps">
+            <li>
+                <span class="b-n">1</span>
+                <h3>Tell us what you need</h3>
+                <p class="m">Share the devices, quantities and timing in a short form.</p>
+            </li>
+            <li>
+                <span class="b-n">2</span>
+                <h3>Get a tailored quote</h3>
+                <p class="m">We reply within one business day with clear, itemised pricing.</p>
+            </li>
+            <li>
+                <span class="b-n">3</span>
+                <h3>Delivered and supported</h3>
+                <p class="m">One coordinated delivery, then support whenever you need it.</p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="b-band">
+        <div>
+            <h3>Ready to equip your team?</h3>
+            <p>Tell us what you need and we will send a tailored quote within one business day.</p>
+        </div>
+        <div class="b-btns">
+            <a class="bw" asp-controller="Home" asp-action="BusinessBuying">Request a quote</a>
+            <a class="b-ghost" asp-controller="Home" asp-action="Support">Talk to support</a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/info-pages.js" asp-append-version="true"></script>
+}

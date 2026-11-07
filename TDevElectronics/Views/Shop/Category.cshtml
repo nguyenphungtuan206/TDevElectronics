@@ -1,0 +1,99 @@
+﻿@model TDevElectronics.Models.ViewModels.ShopViewModel
+
+@{
+    ViewData["Title"] = Model.Category?.Name ?? "Category";
+    ViewBag.Page = "category";
+    var category = Model.Category!;
+}
+
+<section class="pg category-page">
+
+    <p class="cr m">
+        <a asp-controller="Home" asp-action="Index">Home</a>
+        /
+        <a asp-controller="Shop" asp-action="Index">Shop</a>
+        /
+        @category.Name
+    </p>
+
+    <div class="shop-category-hero">
+
+        <div>
+            <span class="pill">@category.Name</span>
+
+            <h1>@category.HeroTitle</h1>
+
+            <p class="m">
+                @category.HeroDescription
+            </p>
+
+            <div class="chips">
+                @foreach (var highlight in category.Highlights)
+                {
+                    <span class="tg b">@highlight</span>
+                }
+            </div>
+
+            <a class="bo"
+               asp-controller="Shop"
+               asp-action="Index">
+                All products
+            </a>
+        </div>
+
+        <div class="ph @category.HeroImageClass"></div>
+
+    </div>
+
+    <div class="category-tips">
+
+        <h2>@category.TipsTitle</h2>
+
+        <div class="g3c">
+
+            @foreach (var tip in category.Tips)
+            {
+                <div class="cd tipc">
+                    <p class="m">@tip</p>
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+    <div class="hx">
+        <h2>@category.Name products</h2>
+
+        <span class="m">
+            Showing @Model.TotalResults products
+        </span>
+    </div>
+
+    <div class="category-layout">
+
+        <partial name="_FilterPanel" model="Model" />
+
+        <div class="g3">
+
+            @foreach (var item in Model.Items)
+            {
+                <partial name="_ProductCard" model="item" />
+            }
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/shop.css"
+          asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/shop.js"
+            asp-append-version="true"></script>
+}

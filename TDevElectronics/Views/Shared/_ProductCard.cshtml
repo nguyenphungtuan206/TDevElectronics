@@ -1,0 +1,68 @@
+﻿@model TDevElectronics.Models.ViewModels.ProductItem
+
+<div class="pc" data-k="@Model.Sku">
+
+    @* Ảnh sản phẩm: nhấn vào để mở trang chi tiết *@
+    <a class="ph @Model.ImageClass"
+       asp-controller="Product"
+       asp-action="Detail"
+       asp-route-sku="@Model.Sku"
+       title="View @Model.Name">
+
+        <svg class="i hr">
+            <use href="#i-heart"></use>
+        </svg>
+
+    </a>
+
+    @* Thương hiệu *@
+    <small class="br">
+        @Model.Brand.ToUpper()
+    </small>
+
+    @* Tên sản phẩm *@
+    <b>
+        <a asp-controller="Product"
+           asp-action="Detail"
+           asp-route-sku="@Model.Sku">
+            @Model.Name
+        </a>
+    </b>
+
+    @* Mô tả và đánh giá *@
+    <p class="sp">
+        @Model.Description
+        <br />
+
+        <span class="st">★</span>
+        @Model.Rating (@Model.ReviewCount)
+    </p>
+
+    @* Giá sản phẩm *@
+    <h3 class="pr">
+        @Model.Price.ToString(
+            "C2",
+            System.Globalization.CultureInfo.GetCultureInfo("en-US")
+        )
+    </h3>
+
+    @* Tình trạng hàng *@
+    @if (Model.Stock > 0)
+    {
+        <span class="tg">In stock</span>
+    }
+    else
+    {
+        <span class="tg a">Out of stock</span>
+    }
+
+    @* Nút thêm vào giỏ hàng *@
+    <button type="button"
+            class="kx"
+            data-k="@Model.Sku"
+            data-n="@Model.Name"
+            disabled="@(Model.Stock <= 0)">
+        Add to Cart
+    </button>
+
+</div>

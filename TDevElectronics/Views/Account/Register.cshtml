@@ -1,0 +1,95 @@
+﻿@model TDevElectronics.Models.ViewModels.RegisterCustomerViewModel
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+}
+
+<section class="pg " id="register">
+    <div class="wrap au">
+        <div class="dkp">
+            <span class="pill w">YOUR WORLD, CONNECTED</span>
+            <h1>One account. Endless possibilities.</h1>
+            <p>Save your favorites and track every delivery.</p>
+            <div class="ph hero hh"></div>
+            <ul class="cl w">
+                <li><svg class="i "><use href="#i-check" /></svg>Your orders, always in reach</li>
+                <li><svg class="i "><use href="#i-check" /></svg>Favorites worth coming back to</li>
+                <li><svg class="i "><use href="#i-check" /></svg>Fast and secure checkout</li>
+            </ul>
+            <small>Trusted by 12,000+ shoppers.</small>
+        </div>
+
+        <div class="af auth-form" data-portal="customer">
+            <nav class="rs" aria-label="Choose account type">
+                <a asp-controller="Account" asp-action="Login" class="on">
+                    <svg class="i"><use href="#i-user" /></svg>
+                    <span><b>Customer</b><small>Shop &amp; request quotes</small></span>
+                </a>
+                <a asp-area="Admin" asp-controller="Auth" asp-action="Login" class="adm ">
+                    <svg class="i"><use href="#i-shield" /></svg>
+                    <span><b>Admin</b><small>Manage the store</small></span>
+                </a>
+            </nav>
+
+            <div class="mt">
+                <a asp-controller="Account" asp-action="Login" class="">Sign in</a>
+                <a asp-controller="Account" asp-action="Register" class="on">Create account</a>
+            </div>
+
+            <h1>Create your TDev account</h1>
+            <p class="m">A better way to shop.</p>
+            <p class="fillr"><a class="pc2" data-fill>Fill sample details</a></p>
+
+            <form asp-controller="Account" asp-action="Register" method="post">
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly" class="er fm" role="alert" style="margin-bottom: 12px;"></div>
+
+                <label class="fld ">
+                    <small>Full name *</small>
+                    <input asp-for="FullName" data-f="fn" type="text" autocomplete="name" placeholder="Nguyễn Văn A" />
+                    <span asp-validation-for="FullName" class="fe"></span>
+                </label>
+
+                <label class="fld ">
+                    <small>Email *</small>
+                    <input asp-for="Email" data-f="email" type="email" autocomplete="email" placeholder="you@example.com" />
+                    <span asp-validation-for="Email" class="fe"></span>
+                </label>
+
+                <label class="fld">
+                    <small>Password *</small>
+                    <span class="pwr">
+                        <input asp-for="Password" data-f="pw" type="password" autocomplete="new-password" />
+                        <button type="button" class="eye" data-eye aria-label="Show password">Show</button>
+                    </span>
+                    <span asp-validation-for="Password" class="fe"></span>
+                </label>
+                
+                <div class="sbar" data-s="0"><i></i><i></i><i></i><i></i></div>
+                <small class="m sl2">Use 6+ characters with a number and a capital letter.</small>
+
+                <label class="fld">
+                    <small>Confirm password *</small>
+                    <span class="pwr">
+                        <input asp-for="ConfirmPassword" data-f="pw2" type="password" autocomplete="new-password" />
+                        <button type="button" class="eye" data-eye aria-label="Show password">Show</button>
+                    </span>
+                    <span asp-validation-for="ConfirmPassword" class="fe"></span>
+                </label>
+
+                <label class="ck">
+                    <input type="checkbox" id="rg-terms" required />I agree to the <a asp-controller="Home" asp-action="Terms">Terms of Service</a> and <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>.
+                </label>
+                <label class="ck">
+                    <input type="checkbox" />Send me occasional product news and exclusive deals.
+                </label>
+
+                <button class="bt wd" type="submit">
+                    Create Account <svg class="i"><use href="#i-arrow" /></svg>
+                </button>
+            </form>
+
+            <p class="m sw4">Already have an account? <a class="pc2" asp-controller="Account" asp-action="Login">Sign in</a></p>
+        </div>
+    </div>
+</section>

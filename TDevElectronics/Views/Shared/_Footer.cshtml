@@ -1,0 +1,40 @@
+﻿<footer class="ft">
+    <div class="wrap fg">
+        <div>
+            <a class="lg" asp-controller="Home" asp-action="Index"><b>T</b>TDev</a>
+            <p>Great tech. For you and your team.<br>Genuine devices, helpful humans.</p>
+        </div>
+        <div>
+            <h4>Quick Links</h4>
+            <a asp-controller="Shop" asp-action="Index">Products</a>
+            <a asp-controller="Shop" asp-action="Index" asp-route-category="Phones">Categories</a>
+            <a asp-controller="Home" asp-action="BusinessBuying">Request a Quote</a>
+            <a asp-controller="Home" asp-action="About">About Us</a>
+        </div>
+        <div>
+            <h4>Support</h4>
+            <a asp-controller="Home" asp-action="Support">Contact Us</a>
+            <a asp-controller="Home" asp-action="Support">Delivery &amp; Returns</a>
+            <a asp-controller="Home" asp-action="Support">Warranty</a>
+            <a asp-controller="Home" asp-action="Support">Help Center</a>
+            <a asp-area="Admin" asp-controller="Auth" asp-action="Login">Staff sign in</a>
+        </div>
+        <div>
+            <h4>Newsletter</h4>
+            <p>Fresh tech and better deals. No noise.</p>
+            <form class="nl" id="nl" novalidate>
+                <input type="email" placeholder="Business email" aria-label="Business email">
+                <button class="bt" type="submit" aria-label="Subscribe">
+                    <svg class="i"><use href="#i-arrow" /></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="wrap cp">
+        <span>© 2026 TDev. All rights reserved.</span>
+        <span>
+            <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a> ·
+            <a asp-controller="Home" asp-action="Terms">Terms of Service</a>
+        </span>
+    </div>
+</footer>

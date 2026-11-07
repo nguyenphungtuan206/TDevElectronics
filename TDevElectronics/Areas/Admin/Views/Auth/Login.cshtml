@@ -1,0 +1,68 @@
+﻿@model TDevElectronics.Models.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Đăng nhập Quản trị viên";
+    Layout = "_Layout"; // Sử dụng layout chung bên ngoài để đồng bộ phong cách với trang login khách
+}
+
+<section class="pg " id="admin-login">
+    <div class="wrap au">
+        <div class="dkp">
+            <span class="pill w">ADMINISTRATION PORTAL</span>
+            <h1>Manage TDev Electronics.</h1>
+            <p>Access products, inventory, customer orders and enterprise quotes.</p>
+            <div class="ph hero hh"></div>
+            <ul class="cl w">
+                <li><svg class="i "><use href="#i-check" /></svg>Role-based access control</li>
+                <li><svg class="i "><use href="#i-check" /></svg>Audit logged actions</li>
+                <li><svg class="i "><use href="#i-check" /></svg>Session auto-timeout: 30 minutes</li>
+            </ul>
+            <small>Restricted access. All attempts are monitored and recorded.</small>
+        </div>
+
+        <div class="af auth-form" data-portal="admin">
+            <nav class="rs" aria-label="Choose account type">
+                <a href="/Account/Login">
+                    <svg class="i"><use href="#i-user" /></svg>
+                    <span><b>Customer</b><small>Shop &amp; request quotes</small></span>
+                </a>
+                <a href="/Admin/Auth/Login" class="adm on">
+                    <svg class="i"><use href="#i-shield" /></svg>
+                    <span><b>Admin</b><small>Manage the store</small></span>
+                </a>
+            </nav>
+
+            <h1>Admin sign in</h1>
+            <p class="m">Sign in with your authorized administrator credentials.</p>
+
+            <form asp-area="Admin" asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@ViewBag.ReturnUrl" method="post">
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly" class="er fm" role="alert" style="margin-bottom: 12px;"></div>
+
+                <label class="fld">
+                    <small>Admin email *</small>
+                    <input asp-for="Email" type="email" autocomplete="username" placeholder="admin@tdevelectronics.local" />
+                    <span asp-validation-for="Email" class="fe"></span>
+                </label>
+
+                <label class="fld">
+                    <small>Password *</small>
+                    <span class="pwr">
+                        <input asp-for="Password" type="password" autocomplete="current-password" />
+                        <button type="button" class="eye" data-eye aria-label="Show password">Show</button>
+                    </span>
+                    <span asp-validation-for="Password" class="fe"></span>
+                </label>
+
+                <button class="bt wd" type="submit" style="margin-top: 14px;">
+                    Sign in to Workspace <svg class="i"><use href="#i-arrow" /></svg>
+                </button>
+            </form>
+
+            <p class="m sw4">
+                Have an invite code?
+                <a class="pc2" href="/Admin/Auth/Register" onclick="window.location.href=this.href;">Activate admin invite</a>
+            </p>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,78 @@
+﻿@model TDevElectronics.Models.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<section class="pg " id="login">
+    <div class="wrap au">
+        <div class="dkp">
+            <span class="pill w">YOUR WORLD, CONNECTED</span>
+            <h1>One account. Endless possibilities.</h1>
+            <p>Save your favorites, track every delivery and make business buying feel simple.</p>
+            <div class="ph hero hh"></div>
+            <ul class="cl w">
+                <li><svg class="i "><use href="#i-check" /></svg>Your orders, always in reach</li>
+                <li><svg class="i "><use href="#i-check" /></svg>Favorites worth coming back to</li>
+                <li><svg class="i "><use href="#i-check" /></svg>Bulk quotes for your growing team</li>
+            </ul>
+            <small>Trusted by 12,000+ shoppers and 186 business teams.</small>
+        </div>
+
+        <div class="af auth-form" data-portal="customer">
+            <nav class="rs" aria-label="Choose account type">
+                <a asp-controller="Account" asp-action="Login" class="on">
+                    <svg class="i"><use href="#i-user" /></svg>
+                    <span><b>Customer</b><small>Shop &amp; request quotes</small></span>
+                </a>
+                <a asp-area="Admin" asp-controller="Auth" asp-action="Login" class="adm ">
+                    <svg class="i"><use href="#i-shield" /></svg>
+                    <span><b>Admin</b><small>Manage the store</small></span>
+                </a>
+            </nav>
+
+            <div class="mt">
+                <a asp-controller="Account" asp-action="Login" class="on">Sign in</a>
+                <a asp-controller="Account" asp-action="Register" class="">Create account</a>
+            </div>
+
+            <h1>Good to see you again.</h1>
+            <p class="m">Sign in for your next great tech moment.</p>
+            <a class="bo wd" data-google>Continue with Google</a>
+            <p class="or">or use your email</p>
+
+            <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewBag.ReturnUrl" method="post">
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly" class="er fm" role="alert" style="margin-bottom: 12px;"></div>
+
+                <label class="fld ">
+                    <small>Email address</small>
+                    <input asp-for="Email" data-f="email" type="email" autocomplete="username" />
+                    <span asp-validation-for="Email" class="fe"></span>
+                </label>
+
+                <label class="fld">
+                    <small>Password</small>
+                    <span class="pwr">
+                        <input asp-for="Password" data-f="pw" type="password" autocomplete="current-password" />
+                        <button type="button" class="eye" data-eye aria-label="Show password">Show</button>
+                    </span>
+                    <span asp-validation-for="Password" class="fe"></span>
+                </label>
+
+                <div class="hx">
+                    <label class="ck">
+                        <input asp-for="RememberMe" type="checkbox" />Remember me
+                    </label>
+                    <a class="pc2" asp-controller="Home" asp-action="Support">Forgot password?</a>
+                </div>
+
+                <button class="bt wd" type="submit">
+                    Sign In <svg class="i"><use href="#i-arrow" /></svg>
+                </button>
+            </form>
+
+            <p class="m sw4">New to TDev? <a class="pc2" asp-controller="Account" asp-action="Register">Create an account</a></p>
+        </div>
+    </div>
+</section>

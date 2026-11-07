@@ -1,0 +1,50 @@
+/* v8: tách cổng Khách hàng / Admin */
+.rb{display:inline-flex;align-items:center;gap:6px;font:700 11px Inter,sans-serif;letter-spacing:.07em;padding:4px 10px;border-radius:999px;text-transform:uppercase;vertical-align:middle}.rb .i{width:13px;height:13px}.rb.c{background:var(--t1);color:var(--p2)}.rb.a{background:#0F172A;color:#fff;border:1px solid #334155}
+[data-theme=dark] .rb.c{color:#AFC0FF}
+.rbar{display:none;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;background:#0F172A;color:#E2E8F0;font-size:13.5px;padding:9px 16px;text-align:center}.rbar a{color:#7FE3CF;font-weight:700;text-decoration:underline}
+[data-role=admin] .rbar{display:flex}body.adm .rbar,body[data-page=admin-login] .rbar,body[data-page=admin-register] .rbar{display:none!important}
+.stf{margin:16px 0 0;padding:12px 14px;border:1px dashed var(--bd);border-radius:12px;font-size:13.5px;color:var(--g);display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.stf a{font-weight:700;color:var(--p)}
+.rx{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 24px}.rx .cd{padding:18px 20px}.rx h3{margin:10px 0 4px}.rx ul{list-style:none;padding:0;margin:10px 0 0;font-size:13.5px}.rx li{margin:7px 0;display:flex;gap:8px;align-items:flex-start}.rx li b{flex:none;width:16px;text-align:center}.rx .y b{color:var(--grn2)}.rx .n b{color:var(--red)}.rx hr{margin:12px 0}
+@media(max-width:760px){.rx{grid-template-columns:1fr}}
+.rh{margin:-4px 0 12px;font-size:12.5px}
+#login .af>small.pc2{display:none}#login .af>.rb{margin-bottom:12px}.ac>p.m{margin:0 0 18px}
+.sb .sv{border-top:1px solid #1E293B;margin-top:10px;padding-top:14px!important}
+
+/* v8.1: giao diện đăng nhập / đăng ký thống nhất */
+.rs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px}
+.rs a{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1.5px solid var(--bd);border-radius:14px;background:var(--s);color:var(--g);transition:.15s}
+.rs a .i{width:24px;height:24px}.rs a span{display:flex;flex-direction:column;line-height:1.25}.rs a b{color:var(--ink);font-size:15px}.rs a small{font-size:12px}
+.rs a:hover{border-color:var(--p)}.rs a.on{border-color:var(--p);background:var(--t1);color:var(--p)}
+.rs a.adm:hover{border-color:#0B9B7E}.rs a.adm.on{border-color:#0B9B7E;background:rgba(11,155,126,.13);color:#0B9B7E}
+.mt{display:flex;gap:24px;border-bottom:1px solid var(--bd);margin:0 0 22px}.mt a{padding:8px 2px 12px;font-weight:600;color:var(--g);border-bottom:2px solid transparent;margin-bottom:-1px}.mt a.on{color:var(--ink);border-color:var(--p)}
+.auth-form h1{font-size:32px;margin:0 0 6px}.auth-form>p.m{margin:0 0 18px}
+.or{display:flex;align-items:center;gap:12px;color:var(--g);font-size:13px;margin:16px 0}.or:before,.or:after{content:"";flex:1;height:1px;background:var(--bd)}
+.pwr{position:relative;display:block}.pwr input{padding-right:56px!important}.eye{position:absolute;right:0;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--p);font:600 13px Inter,sans-serif;cursor:pointer;padding:6px}
+.auth-form .fld:focus-within{border-color:var(--p);box-shadow:0 0 0 3px rgba(59,91,255,.14)}
+.auth-form .fld.bad{border-color:var(--red)}
+.auth-form .mint{padding:12px 16px;margin:14px 0 0;border-radius:12px}
+.er.fm{background:rgba(180,35,24,.08);border:1px solid rgba(180,35,24,.28);border-radius:12px;padding:10px 14px;margin:0 0 12px}.er.fm a{color:var(--p);text-decoration:underline;font-weight:700}
+.sw4{text-align:center;margin:16px 0 0}
+.fillr{margin:-2px 0 12px;font-size:13px}
+.sbar{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:-4px 0 6px}.sbar i{height:4px;border-radius:4px;background:var(--bd)}
+.sbar[data-s="1"] i:nth-child(-n+1){background:#E5484D}.sbar[data-s="2"] i:nth-child(-n+2){background:#F5A524}.sbar[data-s="3"] i:nth-child(-n+3){background:#12A594}.sbar[data-s="4"] i{background:#12A594}
+.sl2{display:block;margin:0 0 12px}
+.note{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1px dashed var(--bd);border-radius:12px;padding:12px 14px;margin:0 0 18px;font-size:13.5px;color:var(--g)}.note .i{color:#0B9B7E;margin-top:1px}
+.dkp.adm{background:linear-gradient(160deg,#0F172A 0,#0B2F2A 100%)}.dkp.adm .cl.w .i{color:#2DD4BF}.dkp.adm .bigi{width:72px;height:72px;color:#2DD4BF;margin:26px 0 10px;display:block}
+[data-portal=admin] .bt{background:#0B7A64}[data-portal=admin] .bt:hover{background:#0B6A57}[data-portal=admin] .fld:focus-within{border-color:#0B9B7E;box-shadow:0 0 0 3px rgba(11,155,126,.16)}[data-portal=admin] .eye{color:#0B9B7E}
+.au>.auth-form{align-self:start}
+[data-portal=admin] .mt a.on{border-color:#0B9B7E}.note a{color:#0B9B7E;text-decoration:underline;font-weight:700}
+@media(max-width:900px){.au .dkp{display:none}.au{gap:0}.auth-form h1{font-size:28px}}
+@media(max-width:420px){.rs a small{display:none}.rs a{padding:12px}}
+
+/* v8.2: menu tài khoản + settings dễ thấy */
+.ico{position:relative}
+.acm{position:absolute;right:0;top:calc(100% + 12px);width:270px;max-width:calc(100vw - 24px);background:var(--s);border:1px solid var(--bd);border-radius:16px;box-shadow:0 14px 40px rgba(15,23,42,.18);padding:8px;z-index:60}.acm[hidden]{display:none}
+.acm-h{display:flex;gap:12px;align-items:center;padding:10px 10px 12px}.acm-h span:last-child{display:flex;flex-direction:column;min-width:0;line-height:1.3}.acm-h b{color:var(--ink)}.acm-h small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acm a{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;color:var(--ink);font-weight:500}.acm a:hover{background:var(--t1)}.acm a .i{width:18px;height:18px;color:var(--g)}
+.acm hr{border:0;border-top:1px solid var(--bd);margin:6px 4px}
+#settings>p.m,#quotes>.hx+.lay3{margin-top:0}#settings>p.m,#account>h1+p.m{margin:0 0 24px}
+.vh{display:none!important}.side a[data-view]{cursor:pointer}
+/* menu danh mục */
+.dd{position:relative;display:inline-block}.ddm{display:none;position:absolute;top:100%;left:0;min-width:190px;background:var(--s);border:1px solid var(--bd);border-radius:12px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,.12);z-index:50}
+.dd:hover .ddm,.dd:focus-within .ddm{display:block}.ddm a{display:block;padding:9px 12px;border-radius:8px;white-space:nowrap}.ddm a:hover{background:var(--t1)}

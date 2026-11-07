@@ -1,0 +1,228 @@
+﻿@model TDevElectronics.Models.ViewModels.ProductItem
+
+@{
+    ViewData["Title"] = Model.Name;
+    ViewBag.Page = "product";
+}
+
+<section class="pg product-detail-page">
+
+    <p class="cr m">
+        <a asp-controller="Home" asp-action="Index">Home</a>
+        /
+        <a asp-controller="Shop" asp-action="Category"
+           asp-route-slug="@Model.CategorySlug">
+            @Model.Category
+        </a>
+        /
+        @Model.Name
+    </p>
+
+    <div class="product-detail-grid">
+
+        <div class="product-gallery">
+
+            <div class="ph @Model.ImageClass product-main-image"
+                 id="product-main-image">
+            </div>
+
+            <div class="product-thumbnails">
+
+                @foreach (var image in Model.GalleryImages)
+                {
+                    <button type="button"
+                            class="ph @image product-thumbnail"
+                            data-image="@image">
+                    </button>
+                }
+
+            </div>
+
+        </div>
+
+        <div class="product-information">
+
+            <small class="br">
+                @Model.Brand.ToUpper() / @Model.Sku.ToUpper()
+            </small>
+
+            <h1>@Model.Name</h1>
+
+            <p class="stars">
+                ★★★★★
+                <small class="m">
+                    @Model.Rating out of 5 ·
+                    @Model.ReviewCount reviews
+                </small>
+            </p>
+
+            <p class="m">
+                @Model.Description
+            </p>
+
+            @if (Model.Stock > 0)
+            {
+                <span class="tg">In stock · @Model.Stock available</span>
+            }
+            else
+            {
+                <span class="tg a">Out of stock</span>
+            }
+
+            <h2 class="big">
+                @Model.Price.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-US"))
+            </h2>
+
+            <small class="m">
+                Retail price · Tax calculated at checkout
+            </small>
+
+            @if (Model.PriceTiers.Count > 0)
+            {
+                <div class="bp">
+
+                    <h3>Better together · Business pricing</h3>
+
+                    <div class="tw">
+                        <table>
+
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Unit price</th>
+                                <th>Savings</th>
+                            </tr>
+
+                            @foreach (var tier in Model.PriceTiers)
+                            {
+                                <tr>
+                                    <td>@tier.QuantityLabel</td>
+
+                                    <td>
+                                        @tier.UnitPrice.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-US"))
+                                    </td>
+
+                                    <td>@tier.SavingLabel</td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+
+                </div>
+            }
+
+            <div class="buy">
+
+                <button type="button"
+                        class="kx"
+                        data-k="@Model.Sku"
+                        data-n="@Model.Name"
+                        disabled="@(Model.Stock <= 0)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+            <p class="m">
+                @Model.Warranty
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="product-tabs">
+
+        <div class="tabs">
+
+            <button type="button"
+                    class="on"
+                    data-tab="overview">
+                Overview
+            </button>
+
+            <button type="button"
+                    data-tab="specs">
+                Specifications
+            </button>
+
+            <button type="button"
+                    data-tab="delivery">
+                Delivery &amp; warranty
+            </button>
+
+        </div>
+
+        <div class="product-tab-content">
+
+            <div data-tab-panel="overview">
+
+                <div class="cd">
+                    <h3>Product overview</h3>
+
+                    <p class="m">
+                        @Model.Overview
+                    </p>
+                </div>
+
+            </div>
+
+            <div data-tab-panel="specs" hidden>
+
+                <div class="cd">
+
+                    <h3>Technical specifications</h3>
+
+                    <dl class="sp2">
+
+                        @foreach (var spec in Model.Specifications)
+                        {
+                            var parts = spec.Split(':', 2);
+
+                            <dt>@parts[0]</dt>
+
+                            <dd>
+                                @(parts.Length > 1 ? parts[1].Trim() : "")
+                            </dd>
+                        }
+
+                    </dl>
+
+                </div>
+
+            </div>
+
+            <div data-tab-panel="delivery" hidden>
+
+                <div class="cd">
+
+                    <h3>Delivery &amp; warranty</h3>
+
+                    <p class="m">
+                        Delivery information will be confirmed during checkout.
+                    </p>
+
+                    <p class="m">
+                        @Model.Warranty
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/shop.css"
+          asp-append-version="true" />
+}
+
+@section Scripts {
+    <script src="~/js/shop.js"
+            asp-append-version="true"></script>
+}

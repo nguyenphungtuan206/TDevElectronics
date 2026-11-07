@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Business Buying";
+}
+
+<section class="pg" id="business-buying">
+    <p class="cr m"><a asp-controller="Home" asp-action="Index">Home</a> &nbsp;/&nbsp; Business / How business buying works</p>
+    <h1>Business buying, made simple.</h1>
+    <p class="m">From your first quote to the last delivery, here is how TDev helps your team get equipped.</p>
+
+    <!-- Các bước mua hàng -->
+    <div class="g3 stt">
+        <div class="cd">
+            <small class="pc2">STEP 1</small>
+            <h3>Tell us what you need</h3>
+            <p class="m">Send a bulk quote request with the devices, quantities and your target delivery date.</p>
+        </div>
+        <div class="cd">
+            <small class="pc2">STEP 2</small>
+            <h3>Receive a tailored quote</h3>
+            <p class="m">Your account specialist checks stock and replies with volume pricing within one business day.</p>
+        </div>
+        <div class="cd">
+            <small class="pc2">STEP 3</small>
+            <h3>Approve and pay your way</h3>
+            <p class="m">Accept the quote, then pay by card, bank transfer or Net 30 invoice with a purchase order.</p>
+        </div>
+    </div>
+
+    <!-- Ưu đãi & cam kết -->
+    <div class="g3">
+        <div class="cd">
+            <h3>Up to 12% volume savings</h3>
+            <p class="m">Team pricing starts from 10 units and improves at 25+.</p>
+        </div>
+        <div class="cd">
+            <h3>One coordinated delivery</h3>
+            <p class="m">We ship your whole order together, on a schedule that fits your rollout.</p>
+        </div>
+        <div class="cd">
+            <h3>Tax invoices &amp; purchase orders</h3>
+            <p class="m">Clean paperwork for your finance team, with a dedicated account specialist.</p>
+        </div>
+    </div>
+
+    <!-- Khối kêu gọi hành động -->
+    <div class="mint">
+        <h3>Ready to equip your team?</h3>
+        <p class="m">Tell us what you need and we will send a tailored quote within one business day.</p>
+        <a class="bt" asp-controller="Home" asp-action="BusinessBuying">Request a bulk quote <svg class="i"><use href="#i-arrow" /></svg></a>
+        <a class="bo" asp-controller="Shop" asp-action="Index">Browse products</a>
+    </div>
+</section>
